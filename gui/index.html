@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <title>NMT</title>
+    <link rel="stylesheet" href="css/mdb.min.css" />
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
+
+    <style type="text/css">
+      #eng_ita{
+        height: auto;
+      }
+      #eng_ita::placeholder {
+        font-weight: bold;
+        opacity: .5;
+        color: #BDBDBD;
+        text-align: left;
+      }
+      body {
+        background-image: url("img/bgg.png");
+        background-repeat: no-repeat, repeat;
+        font-family: 'Lato', sans-serif;
+        background-position: center; /* Center the image */
+        background-size: cover; /* Resize the background image to cover the entire container */
+        background-position: 0 20px !important;
+        background-color: #fbfbfb;
+      }
+    </style>
+
+  </head>
+  <body>
+
+  <nav class="navbar navbar-light bg-white w-100">
+    <span class="navbar-brand mb-0 h1" style="margin-left: 16px;">Comparison of Machine-Translations Models</span>
+    <span class="navbar-brand mb-0 h1">[HLT] Acciaro, Esposito, Galloppi
+        <img src="img/logounipi.jpg" style="height: 48px; margin-left: 16px;">
+      </span>
+  </nav>
+
+  <div class="container">
+
+    <br>
+    <button type="button" id="model_0" class="btn btn-primary btn-md">IBM Model 1 (50k)</button>
+    <button type="button" id="model_1" class="btn btn-white btn-md">LSTM (Custom)</button>
+    <button type="button" id="model_2" class="btn btn-white btn-md">Transformer (Custom)</button>
+    <button type="button" id="model_3" class="btn btn-white btn-md">T5</button>
+    <button type="button" id="model_4" class="btn btn-white btn-md">Bert2Bert</button>
+    <button type="button" id="model_5" class="btn btn-white btn-md">T52Bert</button>
+    <button type="button" id="model_6" class="btn btn-danger btn-md">Helsinki</button>
+    <button type="button" id="model_7" class="btn btn-danger btn-md">DeepL</button>
+      <p id="selected_model" ></p>
+    <br>   <br>
+
+    <button type="button" id="example_0"
+            class="btn btn-tag btn-rounded btn-white"
+            data-mdb-toggle="tooltip"
+            data-mdb-html="true"
+            title="Does she have any friends in Germany?">Example 0</button>
+
+    <button type="button" id="example_1"
+            class="btn btn-tag btn-rounded btn-white"
+            data-mdb-toggle="tooltip"
+            data-mdb-html="true"
+            title="Yesterday I got a new phone">Example 1</button>
+
+    <button type="button" id="example_2"
+            class="btn btn-tag btn-rounded btn-white"
+            data-mdb-toggle="tooltip"
+            data-mdb-html="true"
+            title="Who wants to live forever?">Example 2</button>
+
+    <br>   <br>
+
+    <div class="card">
+      <div class="card-body">
+        <input type="email"
+               class="form-control rounded shadow-none"
+               placeholder="Write here your sentence" id="eng_ita">
+        <br>
+        <button id="translate_visible" type="button" class="btn btn-primary">Translate</button>
+        <button id="translate_hidden" class="btn btn-primary" type="button" disabled>
+          <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+          Loading...
+        </button>
+        <br>
+        <br><p id="result" class="card-text"></p>
+
+
+      </div>
+    </div>
+  </div>
+
+
+  <script>
+    $(document).ready(function(){
+      const models = [$("#model_0"),$("#model_1"), $("#model_2"),  $("#model_3"),  $("#model_4"),  $("#model_5"), $("#model_6"), $("#model_7")];
+
+      $("#selected_model").hide();
+      $("#selected_model").text(models[0].text());
+
+      const examples = [$("#example_0"), $("#example_1"), $("#example_2")];
+      const examples_sentence = ["Does she have any friends in Germany?",
+                                    "Yesterday I got a new phone",
+                                      "Who wants to live forever?"
+                                  ];
+
+      for (let i = 0; i < models.length; i++) {
+        models[i].click(function() {
+          for (let j = 0; j < models.length; j++) {
+            if(j==6 || j==7){
+              models[j].removeClass("btn-primary").addClass("btn-danger");
+            }else{
+              models[j].removeClass("btn-primary").addClass("btn-white");
+            }
+          }
+          models[i].removeClass("btn-white").removeClass("btn-danger").addClass("btn-primary");
+          $("#selected_model").text(models[i].text());
+        });
+      }
+
+      for (let i = 0; i < examples.length; i++) {
+        examples[i].click(function() {
+          let text = examples_sentence[i];
+          $("#eng_ita").val(text);
+        });
+      }
+
+      $("#translate_hidden").hide();
+
+      function pre_execution(){
+        $("#translate_visible").hide();
+        $("#translate_hidden").show();
+        $("#result").val("");
+      }
+      function post_execution(result){
+        $("#translate_visible").show();
+        $("#translate_hidden").hide();
+        $("#result").text(result);
+      }
+
+      $("#translate_visible").click(function () {
+        pre_execution();
+        $.get( "http://localhost:5000/translate?model="+$("#selected_model").text()+"&sentence="+$("#eng_ita").val(), function( data ) {
+          post_execution(data.response);
+        });
+      });
+
+    });
+  </script>
+
+  <!-- MDB -->
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/4.3.0/mdb.min.js"></script>
+
+  </body>
+</html>

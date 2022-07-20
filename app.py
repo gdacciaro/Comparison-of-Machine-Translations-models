@@ -1,6 +1,8 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, render_template
 from flask_cors import CORS, cross_origin
 import time
+from controller.download_weights_if_necessary import download_weights_if_necessary
+download_weights_if_necessary()
 
 print("[SERVER] Server loading...")
 import_start_time = time.time()
@@ -9,7 +11,7 @@ from controller.FS_TransformersController import fs_transformers_translate
 from controller.FS_LSTMController import fs_lstm_translate
 from controller.DeepL_Controller import deepl_translate
 from controller.Helsinki_Controller import helsinki_translate
-from controller.IBMModel_Controller import ibm_translate
+#from controller.IBMModel_Controller import ibm_translate
 from controller.T5_Controller import t5_translate
 
 app = Flask(__name__, static_url_path='/static')
@@ -18,19 +20,14 @@ cors = CORS(app)
 
 print("[SERVER] Server loaded in ", time.time()-import_start_time, " seconds")
 
-@app.route('/')
-def hello_world():  # put application's code here
-    return "render_template('index.html')"
-
-
 @cross_origin()
 @app.route('/translate')
 def query_example():
     model = request.args.get('model')
     sentence = request.args.get('sentence')
 
-    if model == 'IBM Model 1 (50k)' or model == 'IBM Model 1':
-        return jsonify({"response": ibm_translate(sentence)})
+#    if model == 'IBM Model 1 (50k)' or model == 'IBM Model 1':
+    #    return jsonify({"response": ibm_translate(sentence)})
     if model == 'LSTM (Custom)':
         return jsonify({"response": fs_lstm_translate(sentence)})
     if model == 'Transformer (Custom)':

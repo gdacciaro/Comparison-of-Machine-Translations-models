@@ -1,4 +1,3 @@
-import time
 import requests
 
 def deepl_translate(sentence):

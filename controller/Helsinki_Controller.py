@@ -1,17 +1,9 @@
 import warnings
-
 warnings.filterwarnings("ignore")
+from transformers import AutoModelForSeq2SeqLM, AutoTokenizer
 
-import warnings
-
-from transformers import AutoModelForSeq2SeqLM
-import torch # !! Required !!
-warnings.filterwarnings("ignore")
-from nltk.translate.bleu_score import sentence_bleu
 import nltk
 assert (nltk.__version__== '3.2.4')
-
-from transformers import AutoTokenizer
 
 it_en_tokenizer = AutoTokenizer.from_pretrained("Helsinki-NLP/opus-mt-en-it")
 it_en_model = AutoModelForSeq2SeqLM.from_pretrained("Helsinki-NLP/opus-mt-en-it")

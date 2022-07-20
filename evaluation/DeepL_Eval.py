@@ -6,7 +6,7 @@ warnings.filterwarnings("ignore")
 
 from nltk.translate.bleu_score import sentence_bleu
 import nltk
-#assert (nltk.__version__== '3.2.4')
+assert (nltk.__version__== '3.2.4')
 
 def clean(word):
     clean_word = word.lower()
