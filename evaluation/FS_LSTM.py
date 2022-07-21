@@ -16,6 +16,9 @@ import time
 from string import digits
 from nltk.translate.bleu_score import sentence_bleu
 import nltk
+
+from evaluation.evalutator import evaluate_model
+
 assert (nltk.__version__== '3.2.4')
 
 import warnings; warnings.filterwarnings("ignore")
@@ -285,7 +288,6 @@ def evaluate(sentence):
 """## To Plot Attention weights"""
 
 
-# function for plotting the attention weights
 def plot_attention(attention, sentence, predicted_sentence):
     fig = plt.figure(figsize=(10, 10))
     ax = fig.add_subplot(1, 1, 1)
@@ -313,83 +315,9 @@ def translate(sentence, show_attention=False):
     result = result.replace("start_", "")
     return result
 
-
-"""## Restore the latest checkpoint and test"""
-
-# restoring the latest checkpoint in checkpoint_dir
-checkpoint.restore(tf.train.latest_checkpoint(checkpoint_dir))
-
-"""## Final translations with Attention Plots"""
+checkpoint.restore(tf.train.latest_checkpoint(checkpoint_dir)) # restore the latest checkpoint
 
 print("[FS_LSTM] Model loaded in ", time.time()-import_start_time, " seconds")
 
-translate("I picked a card from a deck.", True)
-
-"""# Evaluation
-
-"""
-
-
-def metric(target, output):
-    import warnings
-    warnings.filterwarnings("ignore")
-    reference = [target.split(" ")]
-    candidate = output.split(" ")
-    score = sentence_bleu(reference, candidate)
-    return score
-
-
-with open(text_file) as f:
-    lines = f.read().split("\n")[:-1]
-text_pairs = []
-for line in lines:
-    eng, ita, _ = line.split("\t")
-    ita = "[start] " + ita + " [end]"
-    text_pairs.append((eng, ita))
-
-num_train_samples = int(len(text_pairs) * 0.80)
-train_pairs = text_pairs[:num_train_samples]
-test_pairs = text_pairs[num_train_samples:]
-print("")
-print(f"{len(text_pairs)} total pairs")
-print(f"{len(train_pairs)} training pairs")
-print(f"{len(test_pairs)} test pairs")
-
-
-def clean(word):
-    clean_word = word.lower()
-    clean_word = clean_word.replace(".", "")
-    clean_word = clean_word.replace("\"", "")
-    clean_word = clean_word.replace(",", "")
-    clean_word = clean_word.replace("[start]", "")
-    clean_word = clean_word.replace("[end]", "")
-    clean_word = clean_word.strip()
-    return clean_word
-
-
-def calculate_metric_on_testset():
-    try:
-        result = 0
-        count = 0
-        for i, item in enumerate(test_pairs[0:30]):
-            input_eng = clean(item[0])  # eng
-            target = clean(item[1])  # ita
-            output = clean(translate(input_eng))
-            item_result = metric(target, output)
-            # print(input_eng,"->",output, " ",target,item_result)
-            print("=================== TEST #", i, "===================")
-            print("🇮🇹 ", target)
-            print("🇺🇸 ", input_eng)
-            print("Translated: ", output)
-            print("BLEU score: ", item_result)
-            result += item_result
-            count += 1
-
-        final_result = result / count
-        return final_result
-    except Exception as e:
-        print(">>> Exception:", e)
-        return -1
-
-
-print("\nResult:", calculate_metric_on_testset())
+result = evaluate_model(translate)
+print("Result:",result)
