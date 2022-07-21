@@ -1,4 +1,4 @@
-import warnings; from evaluation.evalutator import evaluate_model, clean
+from evaluation.evalutator import evaluate_model, clean
 
 import pickle
 import time
