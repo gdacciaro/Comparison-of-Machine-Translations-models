@@ -8,7 +8,7 @@ print("[SERVER] Server loading...")
 import_start_time = time.time()
 
 from controller.FS_TransformersController import fs_transformers_translate
-from controller.FS_LSTMController import fs_lstm_translate
+from controller.FS_GRU_Controller import fs_lstm_translate
 from controller.DeepL_Controller import deepl_translate
 from controller.Helsinki_Controller import helsinki_translate
 #from controller.IBMModel_Controller import ibm_translate
