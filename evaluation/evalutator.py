@@ -1,5 +1,5 @@
 text_file = "../dataset/ita.txt"
-num_of_tests = 250
+num_of_tests = 100
 
 with open(text_file) as f:
     lines = f.read().split("\n")[:-1]
@@ -10,7 +10,7 @@ for line in lines:
     text_pairs.append((eng, ita))
 
 import random
-random.seed(80126)
+random.seed(39081)
 random.shuffle(text_pairs)
 
 num_train_samples = int(len(text_pairs) * 0.80)
