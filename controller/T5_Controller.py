@@ -7,7 +7,7 @@ warnings.filterwarnings("ignore")
 print("[T5] Loading models...")
 import_start_time = time.time()
 
-model_checkpoint = "t5-small"  ## "t5_weights-small", "t5_weights-base", "t5_weights-larg", "t5_weights-3b", "t5_weights-11b"
+model_checkpoint = "t5-small" # Load the model
 model_loaded = TFAutoModelForSeq2SeqLM.from_pretrained(model_checkpoint, cache_dir="../.cache")
 model_loaded.load_weights('models/t5_weights/') #Don't put "../" in the path!
 model_loaded.summary()
