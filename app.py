@@ -7,8 +7,8 @@ download_weights_if_necessary()
 print("[SERVER] Server loading...")
 import_start_time = time.time()
 
-from controller.FS_TransformersController import fs_transformers_translate
-from controller.FS_GRU_Controller import fs_lstm_translate
+from controller.FS_Transformers_Controller import fs_transformers_translate
+from controller.FS_GRU_Controller import fs_gru_translate
 from controller.DeepL_Controller import deepl_translate
 from controller.Helsinki_Controller import helsinki_translate
 #from controller.IBMModel_Controller import ibm_translate
@@ -26,10 +26,10 @@ def query_example():
     model = request.args.get('model')
     sentence = request.args.get('sentence')
 
-#    if model == 'IBM Model 1 (50k)' or model == 'IBM Model 1':
-    #    return jsonify({"response": ibm_translate(sentence)})
-    if model == 'LSTM (Custom)':
-        return jsonify({"response": fs_lstm_translate(sentence)})
+    if model == 'IBM Model 1 (50k)' or model == 'IBM Model 1':
+        return jsonify({"response": ibm_translate(sentence)})
+    if model == 'GRU (Custom)':
+        return jsonify({"response": fs_gru_translate(sentence)})
     if model == 'Transformer (Custom)':
         return jsonify({"response": fs_transformers_translate(sentence)})
     if model == 'T5':

@@ -1,5 +1,3 @@
-#Inspired by : https://www.kaggle.com/code/garbo999/machine-translation-ibm-model-1-em-algorithm/notebook
-
 import warnings; warnings.filterwarnings("ignore")
 import pickle
 import time

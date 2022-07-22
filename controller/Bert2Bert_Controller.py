@@ -295,7 +295,7 @@ def create_model(layers_size: int, num_layers: int, dense_size: int, num_heads: 
 d_model = 512
 
 model = create_model(512, 7, 2048, 8, 80, encoder)
-model.load_weights('./save')
+model.load_weights('./fs_transformer_weights')
 model.summary()
 '''
 opt = tf.keras.optimizers.Adam()

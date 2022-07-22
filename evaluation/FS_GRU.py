@@ -229,7 +229,7 @@ def loss_function(real, pred):
     return tf.reduce_mean(loss_)
 
 
-checkpoint_dir = '../models/lstm_weights'
+checkpoint_dir = '../models/gru_weights'
 checkpoint_prefix = os.path.join(checkpoint_dir, "ckpt")
 checkpoint = tf.train.Checkpoint(optimizer=optimizer,
                                  encoder=encoder,

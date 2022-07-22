@@ -8,9 +8,10 @@ from tensorflow import keras
 from tensorflow.keras import layers
 from tensorflow.keras.layers import TextVectorization
 
-from evaluation.evalutator import evaluate_model
+import_start_time = time.time()
+print("[FS_TRANS] Loading model...")
 
-text_file = "../dataset/ita.txt"
+text_file = "dataset/ita.txt"
 vocab_size = 15000
 sequence_length = 20
 max_decoded_sentence_length = 20
@@ -215,7 +216,7 @@ decoder = keras.Model([decoder_inputs, encoded_seq_inputs], decoder_outputs)
 decoder_outputs = decoder([decoder_inputs, encoder_outputs])
 model_loaded = keras.Model([encoder_inputs, decoder_inputs], decoder_outputs, name="transformer")
 model_loaded.compile("rmsprop", loss="sparse_categorical_crossentropy")
-model_loaded.load_weights('../models/fs_transformer_weights/')
+model_loaded.load_weights('models/fs_transformer_weights/')
 model_loaded.summary()
 
 
@@ -233,6 +234,7 @@ def translate2(input_sentence):
             break
     return decoded_sentence
 
-start_time = time.time()
-metric_result = evaluate_model(translate2)
-print(metric_result)
+def fs_transformers_translate(sentence):
+    return translate2(sentence).replace("[start]","").replace("[end]","")
+
+print("[FS_TRANS] Model loaded in ", time.time()-import_start_time, " seconds")

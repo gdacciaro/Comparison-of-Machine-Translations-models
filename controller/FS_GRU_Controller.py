@@ -17,7 +17,7 @@ assert (nltk.__version__== '3.2.4')
 import warnings; warnings.filterwarnings("ignore")
 
 data_path = "dataset/ita.txt" #Don't put "../" in the path!
-checkpoint_dir = 'models/lstm_weights'
+checkpoint_dir = 'models/gru_weights'
 sample_size = 250000
 EPOCHS = 5
 num_of_test = 30
@@ -26,7 +26,7 @@ embedding_dim = 512
 units = 1024
 
 import_start_time = time.time()
-print("[FS_LSTM] Loading model...")
+print("[FS_GRU] Loading model...")
 def preprocess_sentence(sentence):
     # sentence = unicode_to_ascii(sentence.lower().strip())
     num_digits = str.maketrans('', '', digits)
@@ -282,9 +282,9 @@ def translate(sentence, show_attention=False):
     return result
 
 checkpoint.restore(tf.train.latest_checkpoint(checkpoint_dir))
-print("[FS_LSTM] Model loaded in ", time.time()-import_start_time, " seconds")
+print("[FS_GRU] Model loaded in ", time.time()-import_start_time, " seconds")
 
-def fs_lstm_translate(sentence):
+def fs_gru_translate(sentence):
     start_time = time.time()
     print("Translating: "+sentence)
     translated = translate(sentence)
