@@ -2,20 +2,19 @@
 # Commented out IPython magic to ensure Python compatibility.
 from __future__ import absolute_import, division, print_function, unicode_literals
 
-import tensorflow as tf
+import io
+import os
+import re
+import time
+from string import digits
 
 import matplotlib.pyplot as plt
 import matplotlib.ticker as ticker
-from sklearn.model_selection import train_test_split
-import pandas as pd
-import re
-import numpy as np
-import os
-import io
-import time
-from string import digits
-from nltk.translate.bleu_score import sentence_bleu
 import nltk
+import numpy as np
+import pandas as pd
+import tensorflow as tf
+from sklearn.model_selection import train_test_split
 
 from evaluation.evalutator import evaluate_model
 
@@ -38,7 +37,7 @@ lines_raw.sample(5)
 
 
 import_start_time = time.time()
-print("[FS_LSTM] Loading models...")
+print("[FS_GRU] Loading models...")
 def preprocess_sentence(sentence):
     num_digits = str.maketrans('', '', digits)
 
@@ -317,7 +316,7 @@ def translate(sentence, show_attention=False):
 
 checkpoint.restore(tf.train.latest_checkpoint(checkpoint_dir)) # restore the latest checkpoint
 
-print("[FS_LSTM] Model loaded in ", time.time()-import_start_time, " seconds")
+print("[FS_GRU] Model loaded in ", time.time()-import_start_time, " seconds")
 
 result = evaluate_model(translate)
 print("Result:",result)

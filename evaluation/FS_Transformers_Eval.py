@@ -192,12 +192,11 @@ class TransformerDecoder(layers.Layer):
         })
         return config
 
-batch_size = 64
-epochs = 5
-embed_dim = 128
+batch_size = 128
+embed_dim = 256
 latent_dim = 128
-num_heads = 10
-decoder_dropout = 0
+num_heads = 8
+decoder_dropout = 0.5
 
 encoder_inputs = keras.Input(shape=(None,), dtype="int64", name="encoder_inputs")
 x = PositionalEmbedding(sequence_length, vocab_size, embed_dim)(encoder_inputs)
@@ -214,7 +213,9 @@ decoder = keras.Model([decoder_inputs, encoded_seq_inputs], decoder_outputs)
 
 decoder_outputs = decoder([decoder_inputs, encoder_outputs])
 model_loaded = keras.Model([encoder_inputs, decoder_inputs], decoder_outputs, name="transformer")
-model_loaded.compile("rmsprop", loss="sparse_categorical_crossentropy")
+opt = keras.optimizers.Adam(learning_rate=0.0001)
+model_loaded.compile(loss='sparse_categorical_crossentropy', optimizer=opt)
+
 model_loaded.load_weights('../models/fs_transformer_weights/')
 model_loaded.summary()
 

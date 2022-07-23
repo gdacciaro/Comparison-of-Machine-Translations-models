@@ -22,7 +22,10 @@ def the_metric(target, output):
     predictions = [output]
     references = [target]
     bleu = evaluate.load("bleu")
-    results = bleu.compute(predictions=predictions, references=references)["bleu"]
+    try:
+        results = bleu.compute(predictions=predictions, references=references)["bleu"]
+    except:
+        results = 0
     return results
 
 def clean(word):
