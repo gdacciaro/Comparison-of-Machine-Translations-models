@@ -207,7 +207,7 @@ v_size_trg = tokenizer_trg.vocab_size
 
 encoder = TFT5EncoderModel.from_pretrained(source_src)
 transformer = create_model(encoder, embed_dim, v_size_trg, latent_dim, num_heads)
-transformer.load_weights("./trained_models/t5encoder-decoder.h5")
+transformer.load_weights("../models/encT5decScratch/t5encoder-decoder.h5")
 print("[T5 Encoder - Decoder from Scratch] Model loaded in ", time.time()-import_start_time, " seconds")
 
 
