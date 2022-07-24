@@ -51,7 +51,7 @@
     <button type="button" id="model_2" class="btn btn-white btn-md">Transformer (Custom)</button>
     <button type="button" id="model_3" class="btn btn-white btn-md">T5</button>
     <button type="button" id="model_4" class="btn btn-white btn-md">Bert2Bert</button>
-    <button type="button" id="model_5" class="btn btn-white btn-md">T52Bert</button>
+    <button type="button" id="model_5" class="btn btn-white btn-md">encT5/decScratch</button>
     <button type="button" id="model_6" class="btn btn-danger btn-md">Helsinki</button>
     <button type="button" id="model_7" class="btn btn-danger btn-md">DeepL</button>
       <p id="selected_model" ></p>
@@ -61,19 +61,19 @@
             class="btn btn-tag btn-rounded btn-white"
             data-mdb-toggle="tooltip"
             data-mdb-html="true"
-            title="Does she have any friends in Germany?">Example 0</button>
+            title="Here comes the sun">Example 0</button>
 
     <button type="button" id="example_1"
             class="btn btn-tag btn-rounded btn-white"
             data-mdb-toggle="tooltip"
             data-mdb-html="true"
-            title="Yesterday I got a new phone">Example 1</button>
+            title="Hey Jude, don't be afraid.">Example 1</button>
 
     <button type="button" id="example_2"
             class="btn btn-tag btn-rounded btn-white"
             data-mdb-toggle="tooltip"
             data-mdb-html="true"
-            title="Who wants to live forever?">Example 2</button>
+            title="We all live in a yellow submarine">Example 2   <img src="img/sub.png" width=35px"> </button>
 
     <br>   <br>
 
@@ -105,9 +105,9 @@
       $("#selected_model").text(models[0].text());
 
       const examples = [$("#example_0"), $("#example_1"), $("#example_2")];
-      const examples_sentence = ["Does she have any friends in Germany?",
-                                    "Yesterday I got a new phone",
-                                      "Who wants to live forever?"
+      const examples_sentence = ["Here comes the sun",
+                                    "Hey Jude, don't be afraid. ",
+                                      "We all live in a yellow submarine"
                                   ];
 
       for (let i = 0; i < models.length; i++) {
