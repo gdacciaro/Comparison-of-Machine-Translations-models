@@ -193,10 +193,10 @@ class TransformerDecoder(layers.Layer):
         return config
 
 batch_size = 128
-embed_dim = 256
+embed_dim = 512
 latent_dim = 128
 num_heads = 8
-decoder_dropout = 0.5
+decoder_dropout = 0.25
 
 encoder_inputs = keras.Input(shape=(None,), dtype="int64", name="encoder_inputs")
 x = PositionalEmbedding(sequence_length, vocab_size, embed_dim)(encoder_inputs)
