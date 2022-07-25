@@ -27,8 +27,9 @@
 </div>
 
 ## 🔍 Abstract
-TODO: add abstract
-
+"Machine Translation" (MT) refers to that process of automatically translating a text from one "source" language to another "target" language. 
+In this report we explore two possible approaches to deal with this task: Statistical and Neural.
+In particular, we implemented several models from scratch and compared them with models that represent the state of the art.
 
 ## 🔧 Setup
 The files containing the weights of the various models used were not included in this repository because they are very large files.
@@ -40,7 +41,7 @@ Therefore, in order for the program to work, it is necessary to download the wei
 ## 🖥 GUI
 <div align="center">
  <p>
-    <img style="" src="./screenshot.png" >  <br>
+    <img style="" src="./gui.png" >  <br>
   </p>
 </div>
 
