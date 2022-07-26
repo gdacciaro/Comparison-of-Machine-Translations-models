@@ -236,5 +236,5 @@ def decode_sequence(input_sentence, tokenizer_source, tokenizer_target, transfor
 def encT5decScratch_translate(sequence):
   with strategy.scope():
     tokens, translated = decode_sequence(sequence, tokenizer_src, tokenizer_trg, transformer)
-  return translated
+  return translated.replace("[CLS]", "").replace("[PAD]", "")
 
