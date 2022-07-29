@@ -1,3 +1,5 @@
+#HLT Project 2021/2022, Master Degree Computer Science - University of Pisa
+
 from flask import Flask, request, jsonify, render_template
 from flask_cors import CORS, cross_origin
 import time

@@ -41,7 +41,7 @@ Therefore, in order for the program to work, it is necessary to download the wei
 ## 🖥 GUI
 <div align="center">
  <p>
-    <img style="" src="./gui.png" >  <br>
+    <img style="" src="./screenshot.png" >  <br>
   </p>
 </div>
 
