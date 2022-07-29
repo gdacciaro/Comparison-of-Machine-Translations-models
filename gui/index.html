@@ -6,20 +6,11 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge" />
     <title>NMT</title>
     <!-- Font Awesome -->
-    <link
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
-      rel="stylesheet"
-    />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
     <!-- Google Fonts -->
-    <link
-      href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
-      rel="stylesheet"
-    />
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet"/>
     <!-- MDB -->
-    <link
-      href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/4.3.0/mdb.min.css"
-      rel="stylesheet"
-    />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/4.3.0/mdb.min.css" rel="stylesheet" />
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -112,7 +103,7 @@
 
   <script>
     $(document).ready(function(){
-      const models = [$("#model_0"),$("#model_1"), $("#model_2"),  $("#model_3"),  $("#model_4"),  $("#model_5"), $("#model_6"), $("#model_7")];
+      const models = [$("#model_0"), $("#model_1"), $("#model_2"),  $("#model_3"),  $("#model_4"),  $("#model_5"), $("#model_6"), $("#model_7")];
 
       $("#selected_model").hide();
       $("#selected_model").text(models[0].text());
@@ -124,16 +115,16 @@
                                   ];
 
       for (let i = 0; i < models.length; i++) {
-        models[i].click(function() {![](../../../../../var/folders/6m/f_nq8g4538s6sccmbwhx5msc0000gn/T/TemporaryItems/NSIRD_screencaptureui_5nDzPR/Screenshot 2022-07-26 at 11.25.30.png)
-          for (let j = 0; j < models.length; j++) {
-            if(j==6 || j==7){
-              models[j].removeClass("btn-primary").addClass("btn-danger");
-            }else{
-              models[j].removeClass("btn-primary").addClass("btn-white");
+        models[i].click(function() {
+            for (let j = 0; j < models.length; j++) {
+                if(j==6 || j==7){
+                  models[j].removeClass("btn-primary").addClass("btn-danger");
+                }else{
+                  models[j].removeClass("btn-primary").addClass("btn-white");
+                }
             }
-          }
-          models[i].removeClass("btn-white").removeClass("btn-danger").addClass("btn-primary");
-          $("#selected_model").text(models[i].text());
+            models[i].removeClass("btn-white").removeClass("btn-danger").addClass("btn-primary");
+            $("#selected_model").text(models[i].text());
         });
       }
 
